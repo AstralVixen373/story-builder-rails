@@ -10,5 +10,19 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "dashboard#index"
+
+  resources :characters do
+    resources :character_relationships, only: [ :create, :destroy ]
+    resources :character_locations,     only: [ :create, :destroy ]
+  end
+
+  resources :locations
+
+  resources :chapters do
+    resources :scenes
+  end
+
+  get "relationships", to: "relationships#index"
+
 end
