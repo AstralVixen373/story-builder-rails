@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Story Builder Rails" %></title>
+    <title><%= content_for(:title) || "Story Builder" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Story Builder Rails">
+    <meta name="application-name" content="Story Builder">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,6 +24,28 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="main-nav">
+      <div class="nav-brand">
+        <%= link_to "Story Builder", root_path %>
+      </div>
+      <ul class="nav-links">
+        <li><%= link_to "Dashboard", root_path %></li>
+        <li><%= link_to "Characters", characters_path %></li>
+        <li><%= link_to "Locations", locations_path %></li>
+        <li><%= link_to "Chapters", chapters_path %></li>
+        <li><%= link_to "Relationships", relationships_path %></li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <% if notice %>
+        <p class="flash flash--notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="flash flash--alert"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>
