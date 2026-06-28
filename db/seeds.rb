@@ -10,21 +10,21 @@ puts "Creating characters..."
 sleep 3
 
 rosalina = Character.find_or_create_by!(name: "Rosalina") do |c|
-  c.description = "The mysterious guardian of the cosmos and mother figure to the Lumas. Rosalina travels the universe 
-  aboard the Comet Observatory, watching over the stars from afar. Behind her calm, ethereal demeanor lies a deep sorrow 
+  c.description = "The mysterious guardian of the cosmos and mother figure to the Lumas. Rosalina travels the universe
+  aboard the Comet Observatory, watching over the stars from afar. Behind her calm, ethereal demeanor lies a deep sorrow
   she has carried since childhood, a grief she has learned to hold gently, like starlight in cupped hands."
 end
 
 luma = Character.find_or_create_by!(name: "Luma") do |c|
-  c.description = "A small, round star creature with a gentle glow and an unshakeable curiosity about the universe. 
-  Lumas are the children Rosalina has gathered across the cosmos. They are playful and warm, and they regard Rosalina 
+  c.description = "A small, round star creature with a gentle glow and an unshakeable curiosity about the universe.
+  Lumas are the children Rosalina has gathered across the cosmos. They are playful and warm, and they regard Rosalina
   with an adoration that borders on reverence, though they would never hesitate to tug at her gown to get her attention."
 end
 
 astra = Character.find_or_create_by!(name: "Astra") do |c|
-  c.description = "A young girl adventurer with dark hair shot through with a single white streak, as though a star 
-  grazed her on the way past. Astra has the restless energy of someone who has always suspected the universe is 
-  bigger than anyone let on, and the stubbornness to go find out. She arrived at the Comet Observatory by accident, 
+  c.description = "A young girl adventurer with dark hair shot through with a single white streak, as though a star
+  grazed her on the way past. Astra has the restless energy of someone who has always suspected the universe is
+  bigger than anyone let on, and the stubbornness to go find out. She arrived at the Comet Observatory by accident,
   or so she claims."
 end
 
@@ -36,9 +36,9 @@ puts "Creating locations..."
 sleep 3
 
 observatory = Location.find_or_create_by!(name: "Comet Observatory") do |l|
-  l.description = "A vast and beautiful spacecraft shaped like a comet, home to Rosalina and her Lumas. Its domed library 
-  sits at the heart of the ship, filled with the soft hum of the cosmos and the faint smell of old pages. The Grand Dome 
-  opens directly to the stars, no glass, no barrier, just the cold and infinite dark held at bay by something that feels 
+  l.description = "A vast and beautiful spacecraft shaped like a comet, home to Rosalina and her Lumas. Its domed library
+  sits at the heart of the ship, filled with the soft hum of the cosmos and the faint smell of old pages. The Grand Dome
+  opens directly to the stars, no glass, no barrier, just the cold and infinite dark held at bay by something that feels
   very much like love."
 end
 
@@ -50,7 +50,7 @@ puts "Creating chapters..."
 sleep 3
 
 chapter = Chapter.find_or_create_by!(title: "A Light at the Edge of the Sky") do |c|
-  c.description = "Astra arrives at the Comet Observatory for the first time. Rosalina receives her, and for one quiet 
+  c.description = "Astra arrives at the Comet Observatory for the first time. Rosalina receives her, and for one quiet
   evening, the two of them sit with the stars."
   c.position = 1
 end
