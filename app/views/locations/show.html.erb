@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1><%= @location.name %></h1>
+  <div class="page-header-actions">
+    <%= link_to "Edit", edit_location_path(@location), class: "btn btn--primary" %>
+    <%= button_to "Delete", @location, method: :delete, class: "btn btn--danger",
+        data: { turbo_confirm: "Delete #{@location.name}?" } %>
+  </div>
+</div>
+
+<% if @location.description.present? %>
+  <div class="description">
+    <%= simple_format @location.description %>
+  </div>
+<% end %>
+
+<% if @location.characters.any? %>
+  <div class="links-section">
+    <h2>Characters here</h2>
+    <ul class="tag-list">
+      <% @location.characters.each do |character| %>
+        <li class="tag"><%= link_to character.name, character %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
