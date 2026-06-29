@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>Chapter <%= @chapter.position %>: <%= @chapter.title %></h1>
+  <div class="page-header-actions">
+    <%= link_to "Edit Chapter", edit_chapter_path(@chapter), class: "btn" %>
+    <%= link_to "New Scene", new_chapter_scene_path(@chapter), class: "btn btn--primary" %>
+    <%= button_to "Delete Chapter", @chapter, method: :delete, class: "btn btn--danger",
+        data: { turbo_confirm: "Delete \"#{@chapter.title}\" and all its scenes?" } %>
+  </div>
+</div>
+
+<% if @chapter.description.present? %>
+  <div class="description">
+    <%= simple_format @chapter.description %>
+  </div>
+<% end %>
+
+<% if @scenes.any? %>
+  <div class="scene-list">
+    <% @scenes.each do |scene| %>
+      <div class="scene-card">
+        <div class="scene-card-header">
+          <h3><%= scene.title.presence || "Untitled Scene" %></h3>
+          <div class="card-actions">
+            <%= link_to "Write", edit_chapter_scene_path(@chapter, scene), class: "btn btn--sm btn--primary" %>
+            <%= button_to "Delete", chapter_scene_path(@chapter, scene), method: :delete,
+                class: "btn btn--sm btn--danger",
+                data: { turbo_confirm: "Delete this scene?" } %>
+          </div>
+        </div>
+        <% if scene.content.present? %>
+          <p class="scene-preview"><%= truncate(scene.content, length: 150) %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-state">No scenes yet. <%= link_to "Add your first scene", new_chapter_scene_path(@chapter) %>.</p>
+<% end %>
+
+<%= link_to "← Back to Chapters", chapters_path %>

@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>Chapters</h1>
+  <%= link_to "New Chapter", new_chapter_path, class: "btn btn--primary" %>
+</div>
+
+<% if @chapters.any? %>
+  <div class="card-grid">
+    <% @chapters.each do |chapter| %>
+      <div class="card">
+        <p class="card-meta">Chapter <%= chapter.position %></p>
+        <h3><%= link_to chapter.title, chapter %></h3>
+        <p class="card-meta"><%= pluralize(chapter.scenes.size, "scene") %></p>
+        <% if chapter.description.present? %>
+          <p class="card-description"><%= truncate(chapter.description, length: 80) %></p>
+        <% end %>
+        <div class="card-actions">
+          <%= link_to "Open", chapter, class: "btn btn--sm btn--primary" %>
+          <%= link_to "Edit", edit_chapter_path(chapter), class: "btn btn--sm" %>
+          <%= button_to "Delete", chapter, method: :delete, class: "btn btn--sm btn--danger",
+              data: { turbo_confirm: "Delete \"#{chapter.title}\"?" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-state">No chapters yet. <%= link_to "Create your first chapter", new_chapter_path %>.</p>
+<% end %>
