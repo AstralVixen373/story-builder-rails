@@ -1,0 +1,70 @@
+<div class="page-header">
+  <h1><%= @character.name %></h1>
+  <div class="page-header-actions">
+    <%= link_to "Edit", edit_character_path(@character), class: "btn btn--primary" %>
+    <%= button_to "Delete", @character, method: :delete, class: "btn btn--danger",
+        data: { turbo_confirm: "Delete #{@character.name}?" } %>
+  </div>
+</div>
+
+<% if @character.description.present? %>
+  <div class="description">
+    <%= simple_format @character.description %>
+  </div>
+<% end %>
+
+<div class="links-section">
+  <h2>Linked Characters</h2>
+
+  <% if @linked_characters.any? %>
+    <ul class="tag-list">
+      <% @linked_characters.each do |c| %>
+        <li class="tag">
+          <%= link_to c.name, c %>
+          <%= button_to "×", character_character_relationship_path(@character, c.id),
+              method: :delete, class: "tag-remove" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-state">No character links yet.</p>
+  <% end %>
+
+  <% available = @all_characters.reject { |c| @linked_characters.map(&:id).include?(c.id) } %>
+  <% if available.any? %>
+    <%= form_with url: character_character_relationships_path(@character), method: :post, class: "inline-form" do |f| %>
+      <%= select_tag :linked_character_id,
+          options_from_collection_for_select(available, :id, :name),
+          prompt: "Link a character…", class: "form-control" %>
+      <%= f.submit "Link", class: "btn btn--sm" %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="links-section">
+  <h2>Locations</h2>
+
+  <% if @character.locations.any? %>
+    <ul class="tag-list">
+      <% @character.locations.each do |loc| %>
+        <li class="tag">
+          <%= link_to loc.name, loc %>
+          <%= button_to "×", character_character_location_path(@character, loc.id),
+              method: :delete, class: "tag-remove" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="empty-state">No locations linked yet.</p>
+  <% end %>
+
+  <% available_locations = @all_locations.reject { |l| @linked_location_ids.include?(l.id) } %>
+  <% if available_locations.any? %>
+    <%= form_with url: character_character_locations_path(@character), method: :post, class: "inline-form" do |f| %>
+      <%= select_tag :location_id,
+          options_from_collection_for_select(available_locations, :id, :name),
+          prompt: "Link a location…", class: "form-control" %>
+      <%= f.submit "Link", class: "btn btn--sm" %>
+    <% end %>
+  <% end %>
+</div>

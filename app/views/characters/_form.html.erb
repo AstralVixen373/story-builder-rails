@@ -1,0 +1,21 @@
+<%= form_with model: character, class: "form" do |f| %>
+  <% if character.errors.any? %>
+    <div class="form-errors">
+      <% character.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 6, class: "form-control" %>
+  </div>
+
+  <%= f.submit class: "btn btn--primary" %>
+<% end %>

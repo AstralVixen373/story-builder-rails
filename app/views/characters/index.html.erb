@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Characters</h1>
+  <%= link_to "New Character", new_character_path, class: "btn btn--primary" %>
+</div>
+
+<% if @characters.any? %>
+  <div class="card-grid">
+    <% @characters.each do |character| %>
+      <div class="card">
+        <h3><%= link_to character.name, character %></h3>
+        <p class="card-meta">
+          <%= pluralize(character.linked_characters.size + character.inverse_linked_characters.size, "connection") %>
+          · <%= pluralize(character.locations.size, "location") %>
+        </p>
+        <p class="card-description"><%= truncate(character.description, length: 100) %></p>
+        <div class="card-actions">
+          <%= link_to "Edit", edit_character_path(character), class: "btn btn--sm" %>
+          <%= button_to "Delete", character, method: :delete, class: "btn btn--sm btn--danger",
+              data: { turbo_confirm: "Delete #{character.name}?" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-state">No characters yet. <%= link_to "Create your first character", new_character_path %>.</p>
+<% end %>
