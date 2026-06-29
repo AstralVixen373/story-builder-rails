@@ -1,0 +1,17 @@
+<div class="editor-header">
+  <div class="editor-breadcrumb">
+    <%= link_to "Chapters", chapters_path %> /
+    <%= link_to @chapter.title, @chapter %> /
+    <%= @scene.title.presence || "Untitled Scene" %>
+  </div>
+  <div class="editor-meta">
+    <span class="word-count">
+      <%= pluralize(@scene.content.to_s.split.size, "word") %>
+    </span>
+    <%= link_to "Delete Scene", chapter_scene_path(@chapter, @scene), method: :delete,
+        class: "btn btn--sm btn--danger",
+        data: { turbo_confirm: "Delete this scene?" } %>
+  </div>
+</div>
+
+<%= render "form", chapter: @chapter, scene: @scene %>

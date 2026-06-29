@@ -1,0 +1,22 @@
+<%= form_with model: [ chapter, scene ], class: "form form--scene" do |f| %>
+  <% if scene.errors.any? %>
+    <div class="form-errors">
+      <% scene.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Scene title" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, "Content" %>
+    <%= f.text_area :content, rows: 30, class: "form-control form-control--editor",
+        placeholder: "Write your scene here…" %>
+  </div>
+
+  <%= f.submit "Save", class: "btn btn--primary" %>
+<% end %>
