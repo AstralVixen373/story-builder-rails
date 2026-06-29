@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Relationships</h1>
+  <p class="page-subtitle">
+    <%= pluralize(@graph_data.then { |d| JSON.parse(d)["characters"].size }, "character") %>,
+    <%= pluralize(JSON.parse(@graph_data)["locations"].size, "location") %>
+  </p>
+</div>
+
+<div class="graph-container"
+     data-controller="graph"
+     data-graph-data-value="<%= @graph_data.html_safe %>">
+</div>
